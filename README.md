@@ -1,4 +1,3 @@
-[README.md](https://github.com/user-attachments/files/26440495/README.md)
 # Brain Tumor Classifier
 
 A deep learning project that classifies brain MRI scans as **tumor** or **no tumor** using a fine-tuned ResNet-18 model. Includes a full training pipeline and an interactive web app built with Streamlit.
@@ -65,7 +64,9 @@ This will:
 streamlit run streamlit_app.py
 ```
 
-Then open **http://localhost:8501** in your browser.
+Streamlit will print a local URL in the terminal — open that in your browser.
+
+> **This link only works on your own computer while the app is running.** It is not a public URL and cannot be opened from GitHub.
 
 > You must train the model first — the app loads `outputs/brain_tumor_model.pth`.
 
