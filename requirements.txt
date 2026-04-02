@@ -1,1 +1,8 @@
 # Lists all Python packages this project depends on to run
+torch==2.11.0
+torchvision==0.26.0
+streamlit==1.56.0
+Pillow==12.2.0
+scikit-learn==1.8.0
+matplotlib==3.10.8
+tqdm==4.67.3
