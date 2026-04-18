@@ -2,6 +2,16 @@
 
 A deep learning project that classifies brain MRI scans as **tumor** or **no tumor** using a fine-tuned ResNet-18 model. Includes a full training pipeline and an interactive web app built with Streamlit.
 
+> ⚠ **Educational project — not a medical device.** This is a student project built to learn about neural networks. The model was trained on a small dataset and its predictions are **not reliable**. Do not use it for diagnosis, screening, or any medical decision. Always consult a qualified healthcare professional.
+
+---
+
+## Live demo
+
+Try it in your browser: **https://brain-tumor-classifier-arpkufykr5fkq4w6azzwal.streamlit.app/**
+
+![App screenshot](Screenshot.png)
+
 ---
 
 ## What it does
@@ -29,7 +39,8 @@ Upload a brain MRI image and the app tells you whether a tumor is detected — w
 ├── evaluation/
 │   └── evaluate.py       # Test-set evaluation, confusion matrix, training curves
 │
-├── outputs/              # Saved model weights + generated plots (git-ignored)
+├── outputs/              # Saved model weights + generated plots
+│   └── brain_tumor_model.pth   # Trained weights (tracked so the live app can load them)
 │
 ├── config.py             # All hyperparameters and paths in one place
 ├── main.py               # Run this to train the model
@@ -38,7 +49,9 @@ Upload a brain MRI image and the app tells you whether a tumor is detected — w
 
 ---
 
-## How to run
+## Run locally
+
+The easiest way to use the app is the [live demo](#live-demo) above. The steps below are only needed if you want to run it on your own machine or retrain the model.
 
 ### 1. Install dependencies
 
@@ -46,7 +59,15 @@ Upload a brain MRI image and the app tells you whether a tumor is detected — w
 pip install -r requirements.txt
 ```
 
-### 2. Train the model
+### 2. Launch the web app
+
+```bash
+streamlit run streamlit_app.py
+```
+
+Streamlit will print a local URL in the terminal — open that in your browser. The trained model (`outputs/brain_tumor_model.pth`) is included in the repo, so no training is required to use the app.
+
+### 3. (Optional) Retrain the model
 
 ```bash
 python main.py
@@ -55,20 +76,8 @@ python main.py
 This will:
 - Print a dataset summary
 - Train for 15 epochs
-- Save the model to `outputs/brain_tumor_model.pth`
+- Overwrite `outputs/brain_tumor_model.pth`
 - Save training curves and a confusion matrix to `outputs/`
-
-### 3. Launch the web app
-
-```bash
-streamlit run streamlit_app.py
-```
-
-Streamlit will print a local URL in the terminal — open that in your browser.
-
-> **This link only works on your own computer while the app is running.** It is not a public URL and cannot be opened from GitHub.
-
-> You must train the model first — the app loads `outputs/brain_tumor_model.pth`.
 
 ---
 
