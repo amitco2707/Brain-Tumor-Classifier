@@ -1,4 +1,6 @@
 # Lists all Python packages this project depends on to run
+# CPU-only PyTorch wheels — keeps the Streamlit Cloud image small (no CUDA).
+--extra-index-url https://download.pytorch.org/whl/cpu
 torch==2.11.0
 torchvision==0.26.0
 streamlit==1.56.0
