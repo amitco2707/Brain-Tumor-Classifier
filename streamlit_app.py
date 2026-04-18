@@ -39,6 +39,19 @@ st.markdown("""
     }
     .header-banner p { color: #8da9c4; font-size: 0.95rem; margin: 0; }
 
+    .disclaimer-banner {
+        background: linear-gradient(135deg, #3a2a08 0%, #5a3e0a 100%);
+        border: 1px solid #c08a20;
+        border-left: 4px solid #f5b041;
+        border-radius: 10px;
+        padding: 14px 18px;
+        margin-bottom: 24px;
+        color: #ffe0a3;
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+    .disclaimer-banner strong { color: #ffd166; }
+
     [data-testid="stFileUploader"] {
         background-color: #0d1b2e;
         border: 2px dashed #1e4080;
@@ -110,6 +123,14 @@ st.markdown("""
     <div style="font-size:2.8rem;">🧠</div>
     <h1>Brain Tumor Classifier</h1>
     <p>Upload a 2D brain MRI image (JPG/PNG) for AI-assisted tumor detection</p>
+</div>
+
+<div class="disclaimer-banner">
+    <strong>⚠ Educational project — not a medical device.</strong>
+    This is a student project built to learn about neural networks.
+    The model was trained on a small dataset and its predictions are
+    <strong>not reliable</strong>. Do not use it for diagnosis, screening,
+    or any medical decision. Always consult a qualified healthcare professional.
 </div>
 """, unsafe_allow_html=True)
 
