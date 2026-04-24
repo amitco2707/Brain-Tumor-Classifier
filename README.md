@@ -105,3 +105,5 @@ All settings are in `config.py`:
 253 brain MRI images split into two classes:
 - **Yes** (tumor): 155 images
 - **No** (no tumor): 98 images
+
+Source: [**Brain MRI Images for Brain Tumor Detection**](https://www.kaggle.com/datasets/navoneel/brain-mri-images-for-brain-tumor-detection) by **Navoneel Chakrabarty** on Kaggle. License: unspecified by the original author; used here for educational / non-commercial research purposes only. All credit to the original dataset author.

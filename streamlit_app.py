@@ -86,6 +86,21 @@ st.markdown("""
 
     .section-divider { border:none; border-top:1px solid #1a2f4e; margin:24px 0; }
     .img-caption { text-align:center; font-size:0.8rem; color:#8da9c4; margin-top:4px; }
+
+    .sample-header {
+        font-size: 0.95rem;
+        color: #8da9c4;
+        margin: 20px 0 10px 0;
+        text-align: center;
+    }
+    .sample-truth {
+        text-align: center;
+        font-size: 0.75rem;
+        color: #6b83a3;
+        margin: 4px 0 6px 0;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -141,8 +156,42 @@ uploaded_file = st.file_uploader(
     label_visibility="visible"
 )
 
-if uploaded_file:
+# Sample gallery — click a thumbnail to run the model on a known image from
+# the training set. Paths point directly into data/ (tracked in the repo).
+SAMPLES = [
+    {"path": "data/yes/Y24.jpg",   "truth": "With tumor"},
+    {"path": "data/yes/Y41.jpg",   "truth": "With tumor"},
+    {"path": "data/no/no 96.jpg",  "truth": "No tumor"},
+    {"path": "data/no/No19.jpg",   "truth": "No tumor"},
+]
+
+if "sample_path" not in st.session_state:
+    st.session_state.sample_path = None
+
+st.markdown('<div class="sample-header">Or try one of these example MRIs — click to classify</div>', unsafe_allow_html=True)
+
+sample_cols = st.columns(len(SAMPLES))
+for col, sample in zip(sample_cols, SAMPLES):
+    with col:
+        st.image(sample["path"], use_container_width=True)
+        st.markdown(f'<div class="sample-truth">{sample["truth"]}</div>', unsafe_allow_html=True)
+        if st.button("Use this", key=sample["path"], use_container_width=True):
+            st.session_state.sample_path = sample["path"]
+
+# Decide which image to classify this run:
+# - an upload always wins (and clears any previous sample selection)
+# - otherwise fall back to a clicked sample
+image = None
+source_caption = None
+if uploaded_file is not None:
+    st.session_state.sample_path = None
     image = Image.open(uploaded_file).convert("RGB")
+    source_caption = "Uploaded MRI"
+elif st.session_state.sample_path:
+    image = Image.open(st.session_state.sample_path).convert("RGB")
+    source_caption = "Sample MRI"
+
+if image is not None:
 
     st.markdown('<hr class="section-divider">', unsafe_allow_html=True)
 
@@ -182,8 +231,8 @@ if uploaded_file:
 
     st.markdown('<hr class="section-divider">', unsafe_allow_html=True)
 
-    # Uploaded image centered
+    # Image preview centered
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
         st.image(image, use_container_width=True)
-        st.markdown('<p class="img-caption">Uploaded MRI</p>', unsafe_allow_html=True)
+        st.markdown(f'<p class="img-caption">{source_caption}</p>', unsafe_allow_html=True)
